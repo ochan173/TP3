@@ -50,6 +50,11 @@ public class EndroitLog {
         return mEndroits;
     }
 
+    public int getNbEndroits()
+    {
+        return getEndroits().size();
+    }
+
     public  Endroit getEndroit(UUID id)
     {
         EndroitCursorWrapper cursor = new EndroitCursorWrapper(mDatabase.query(EndroitDBSchema.EndroitTable.NAME, null, EndroitDBSchema.EndroitTable.Cols.UUID + "=?",
