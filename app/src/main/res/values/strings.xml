@@ -2,4 +2,6 @@
     <string name="app_name">TP3</string>
     <string name="title_activity_maps">Map</string>
     <string name="nb_endroit">Nombre d`endroit visité:</string>
+    <string name="nom_title">Nom : </string>
+    <string name="description_title">Description : </string>
 </resources>
