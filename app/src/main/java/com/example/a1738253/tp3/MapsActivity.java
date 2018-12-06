@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends DualFragementActivity implements MapsFragment.CallBacks {
 
     private GoogleMap mMap;
+    private Mode actualMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +29,26 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
         {
             case Ajout:
                 setTopFragment(new AjoutModeFragment());
+                actualMode = Mode.Ajout;
                 break;
             case Aucun:
                 setTopFragment(new AucunModeFragment());
+                actualMode = Mode.Aucun;
                 break;
             case Information:
                 setTopFragment(new InformationFragment());
+                actualMode = Mode.Information;
                 break;
             case Modification:
                 setTopFragment(new ModificationFragment());
+                actualMode = Mode.Modification;
                 break;
                 default:
                     break;
         }
+    }
+
+    public Mode getActualMode() {
+        return actualMode;
     }
 }
