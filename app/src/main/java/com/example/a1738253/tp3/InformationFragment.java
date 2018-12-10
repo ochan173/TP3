@@ -35,7 +35,7 @@ public class InformationFragment extends Fragment{
         InformationFragment fragment = new InformationFragment();
         fragment.setArguments(args);
 
-        return new InformationFragment();
+        return fragment;
     }
 
     @Override

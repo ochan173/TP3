@@ -35,7 +35,7 @@ public class ModificationFragment extends Fragment {
         ModificationFragment fragment = new ModificationFragment();
         fragment.setArguments(args);
 
-        return new ModificationFragment();
+        return fragment;
     }
 
     @Override

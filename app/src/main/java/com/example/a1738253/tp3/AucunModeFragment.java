@@ -27,15 +27,15 @@ public class AucunModeFragment extends Fragment{
     private MapsFragment.CallBacks mode;
 
 
-    public static AucunModeFragment NewInstance(UUID id){
+    public static AucunModeFragment NewInstance(){
 
         Bundle args = new Bundle();
-        args.putSerializable(ARG_ENDROIT_ID, id);
+        //args.putSerializable(ARG_ENDROIT_ID, id);
 
         AucunModeFragment fragment = new AucunModeFragment();
         fragment.setArguments(args);
 
-        return new AucunModeFragment();
+        return fragment;
     }
 
 
@@ -55,9 +55,9 @@ public class AucunModeFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
+        //UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
 
-        mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
+        //mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
     }
 
     @Nullable
@@ -65,8 +65,13 @@ public class AucunModeFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View v = inflater.inflate(R.layout.aucun_mode_layout, container, false);
 
+       String nbEndroits = String.valueOf(EndroitLog.get(getContext()).getNbEndroits());
+
+       if (nbEndroits == "")
+           nbEndroits = "0";
+
        mNbEndroits = v.findViewById(R.id.nb_endroits);
-       mNbEndroits.setText(EndroitLog.get(getContext()).getNbEndroits());
+       mNbEndroits.setText(nbEndroits);
 
        mAjoutButton = v.findViewById(R.id.ajout);
        mAjoutButton.setOnClickListener(new View.OnClickListener() {

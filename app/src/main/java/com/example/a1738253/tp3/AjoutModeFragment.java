@@ -32,7 +32,7 @@ public class AjoutModeFragment extends Fragment {
         AjoutModeFragment fragment = new AjoutModeFragment();
         fragment.setArguments(args);
 
-        return new AjoutModeFragment();
+        return fragment;
     }
 
     @Override
