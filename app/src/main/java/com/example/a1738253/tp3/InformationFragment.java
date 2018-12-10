@@ -27,6 +27,17 @@ public class InformationFragment extends Fragment{
     private Button mSupprimerButton;
     private MapsFragment.CallBacks mode;
 
+    public static InformationFragment NewInstance(UUID id){
+
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_ENDROIT_ID, id);
+
+        InformationFragment fragment = new InformationFragment();
+        fragment.setArguments(args);
+
+        return new InformationFragment();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -62,7 +73,7 @@ public class InformationFragment extends Fragment{
         mModifierButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Modification);
+                mode.onChangeMode(Mode.Modification, mEndroit.getmId());
             }
         });
 
@@ -70,7 +81,7 @@ public class InformationFragment extends Fragment{
         mSupprimerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Aucun);
+                mode.onChangeMode(Mode.Aucun, mEndroit.getmId());
             }
         });
 

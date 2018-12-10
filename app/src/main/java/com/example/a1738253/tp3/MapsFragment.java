@@ -37,7 +37,7 @@ public class MapsFragment extends SupportMapFragment {
 
     public interface CallBacks
     {
-        void onChangeMode(Mode mode);
+        void onChangeMode(Mode mode, UUID id);
         Mode getMode();
     }
 
@@ -76,7 +76,7 @@ public class MapsFragment extends SupportMapFragment {
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
-                            mCallBacks.onChangeMode(Mode.Information);
+                            mCallBacks.onChangeMode(Mode.Information, mEndroit.getmId());
                             return true;
                         }
                     });
@@ -113,7 +113,7 @@ public class MapsFragment extends SupportMapFragment {
 
                         @Override
                         public void onMarkerDragEnd(Marker marker) {
-                           // EndroitLog.get(getContext()).updateEndroit();
+                           //EndroitLog.get(getContext()).updateEndroit();
                         }
                     });
                 }

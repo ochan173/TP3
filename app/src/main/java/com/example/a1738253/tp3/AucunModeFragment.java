@@ -26,6 +26,19 @@ public class AucunModeFragment extends Fragment{
     private Button mAjoutButton;
     private MapsFragment.CallBacks mode;
 
+
+    public static AucunModeFragment NewInstance(UUID id){
+
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_ENDROIT_ID, id);
+
+        AucunModeFragment fragment = new AucunModeFragment();
+        fragment.setArguments(args);
+
+        return new AucunModeFragment();
+    }
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -59,7 +72,7 @@ public class AucunModeFragment extends Fragment{
        mAjoutButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               mode.onChangeMode(Mode.Ajout);
+               mode.onChangeMode(Mode.Ajout, mEndroit.getmId());
            }
        });
 

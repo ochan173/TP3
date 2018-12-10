@@ -27,6 +27,17 @@ public class ModificationFragment extends Fragment {
     private Button mDétailsButton;
     private MapsFragment.CallBacks mode;
 
+    public static ModificationFragment NewInstance(UUID id){
+
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_ENDROIT_ID, id);
+
+        ModificationFragment fragment = new ModificationFragment();
+        fragment.setArguments(args);
+
+        return new ModificationFragment();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -59,7 +70,7 @@ public class ModificationFragment extends Fragment {
         mAnnulerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Aucun);
+                mode.onChangeMode(Mode.Aucun, mEndroit.getmId());
             }
         });
 
@@ -67,7 +78,7 @@ public class ModificationFragment extends Fragment {
         mSauvegarderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Information);
+                mode.onChangeMode(Mode.Information, mEndroit.getmId());
             }
         });
 

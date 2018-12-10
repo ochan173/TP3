@@ -24,6 +24,17 @@ public class AjoutModeFragment extends Fragment {
     private Button mAnnulerButton;
     private MapsFragment.CallBacks mode;
 
+    public static AjoutModeFragment NewInstance(UUID id){
+
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_ENDROIT_ID, id);
+
+        AjoutModeFragment fragment = new AjoutModeFragment();
+        fragment.setArguments(args);
+
+        return new AjoutModeFragment();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -54,7 +65,7 @@ public class AjoutModeFragment extends Fragment {
         mAnnulerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Aucun);
+                mode.onChangeMode(Mode.Aucun, mEndroit.getmId());
             }
         });
 

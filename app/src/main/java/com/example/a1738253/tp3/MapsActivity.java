@@ -3,6 +3,8 @@ package com.example.a1738253.tp3;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.example.a1738253.tp3.Modele.Endroit;
+import com.example.a1738253.tp3.Modele.EndroitLog;
 import com.example.a1738253.tp3.Modele.Mode;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,6 +12,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.UUID;
 
 public class MapsActivity extends DualFragementActivity implements MapsFragment.CallBacks {
 
@@ -24,27 +28,27 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
     }
 
     @Override
-    public void onChangeMode(Mode mode) {
+    public void onChangeMode(Mode mode, UUID id) {
         switch (mode)
         {
             case Ajout:
-                setTopFragment(new AjoutModeFragment());
+                setTopFragment(AjoutModeFragment.NewInstance(id));
                 actualMode = Mode.Ajout;
                 break;
             case Aucun:
-                setTopFragment(new AucunModeFragment());
+                setTopFragment(AucunModeFragment.NewInstance(id));
                 actualMode = Mode.Aucun;
                 break;
             case Information:
-                setTopFragment(new InformationFragment());
+                setTopFragment(InformationFragment.NewInstance(id));
                 actualMode = Mode.Information;
                 break;
             case Modification:
-                setTopFragment(new ModificationFragment());
+                setTopFragment(ModificationFragment.NewInstance(id));
                 actualMode = Mode.Modification;
                 break;
                 default:
-                    setTopFragment(new AucunModeFragment());
+                    setTopFragment(AucunModeFragment.NewInstance(id));
                     actualMode = Mode.Aucun;
                     break;
         }
