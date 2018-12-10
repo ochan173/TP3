@@ -55,9 +55,9 @@ public class AucunModeFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
+        UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
 
-        //mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
+        mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
     }
 
     @Nullable

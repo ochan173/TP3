@@ -23,6 +23,7 @@ public class MapsFragment extends SupportMapFragment {
     private static final int REQUEST_CODE = 0;
     private  static final String DIALOG_TAG = "DialogTag";
 
+    private UUID endroitID;
     private GoogleMap mMap;
     private CallBacks mCallBacks;
     private Endroit mEndroit;
@@ -47,9 +48,11 @@ public class MapsFragment extends SupportMapFragment {
         mCallBacks = null;
     }
 
-    public static MapsFragment newInstance()
+    public static MapsFragment newInstance1(String id)
     {
         Bundle args = new Bundle();
+        args.putSerializable(ARG_ENDROIT_ID, id);
+
         MapsFragment fragment = new MapsFragment();
         fragment.setArguments(args);
 
@@ -61,9 +64,10 @@ public class MapsFragment extends SupportMapFragment {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        final UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
+       // final UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
+        if(getArguments().getSerializable(ARG_ENDROIT_ID) != null)
+            endroitID = UUID.fromString(getArguments().getSerializable(ARG_ENDROIT_ID).toString());
 
-        mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
 
         getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -84,6 +88,11 @@ public class MapsFragment extends SupportMapFragment {
                             return true;
                         }
                     });
+                }
+
+                if (actualMode == Mode.Information)
+                {
+                    mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
                 }
 
                 if (actualMode == Mode.Modification) {
