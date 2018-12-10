@@ -1,16 +1,9 @@
 package com.example.a1738253.tp3;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.example.a1738253.tp3.Modele.Endroit;
 import com.example.a1738253.tp3.Modele.EndroitLog;
@@ -119,7 +112,6 @@ public class MapsFragment extends SupportMapFragment {
 
                         @Override
                         public void onMarkerDragEnd(Marker marker) {
-                           //EndroitLog.get(getContext()).updateEndroit();
                             EndroitLog.get(getContext()).updateEndroit(EndroitLog.get(getContext())
                                     .getEndroit(endroitID));
                         }
