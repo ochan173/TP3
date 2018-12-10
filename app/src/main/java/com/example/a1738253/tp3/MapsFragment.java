@@ -83,7 +83,6 @@ public class MapsFragment extends SupportMapFragment {
                 }
 
                 if (actualMode == Mode.Modification) {
-
                     mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                         @Override
                         public void onMapClick(LatLng latLng) {
@@ -96,7 +95,11 @@ public class MapsFragment extends SupportMapFragment {
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
-                            //TODO rendre invisible les autres marqueurs pour tout les marqueurs utilisé marker.isVisible();
+                            for (Endroit endroit: EndroitLog.get(getContext()).getEndroits()) {
+                                Marker marqueur = mMap.addMarker(new MarkerOptions().position(new LatLng(endroit.getmLatitude(), endroit.getmLongitude())));
+                                if(marqueur != marker)
+                                    marqueur.setVisible(false);
+                            }
                             marker.isDraggable();
                             return true;
                         }
