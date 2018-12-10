@@ -47,6 +47,16 @@ public class MapsFragment extends SupportMapFragment {
         mCallBacks = null;
     }
 
+    public static MapsFragment newInstance()
+    {
+        Bundle args = new Bundle();
+        MapsFragment fragment = new MapsFragment();
+        fragment.setArguments(args);
+
+        return  fragment;
+
+    }
+
 
     @Override
     public void onCreate(Bundle bundle) {

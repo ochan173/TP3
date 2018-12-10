@@ -31,7 +31,7 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
         UUID endroitID = (UUID)getIntent().getSerializableExtra(MapsActivity.EXTRA_ENDROIT_ID);
 
         setTopFragment(AucunModeFragment.NewInstance());
-        setMainFragment(new MapsFragment());
+        setMainFragment(MapsFragment.newInstance());
     }
 
     @Override
