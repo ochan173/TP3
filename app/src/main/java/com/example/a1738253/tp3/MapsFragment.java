@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.a1738253.tp3.Modele.Endroit;
 import com.example.a1738253.tp3.Modele.EndroitLog;
 import com.example.a1738253.tp3.Modele.Mode;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,22 +22,30 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.UUID;
+
 public class MapsFragment extends SupportMapFragment {
+
+    private  static  final String ARG_ENDROIT_ID = "endroit_id";
+    private static final int REQUEST_CODE = 0;
+    private  static final String DIALOG_TAG = "DialogTag";
 
     private GoogleMap mMap;
     private CallBacks mCallBacks;
-    private MapsActivity mapsActivity = newInstance();
-    private Mode actualMode = mapsActivity.getActualMode();
+    private Endroit mEndroit;
+    private Mode actualMode;
 
     public interface CallBacks
     {
         void onChangeMode(Mode mode);
+        Mode getMode();
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mCallBacks = (CallBacks) context;
+        actualMode = mCallBacks.getMode();
     }
 
     @Override
@@ -44,14 +54,25 @@ public class MapsFragment extends SupportMapFragment {
         mCallBacks = null;
     }
 
+
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
+
+        mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
 
         getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 mMap = googleMap;
+
+                if (actualMode == Mode.Aucun)
+                {
+                    for (Endroit markeur: EndroitLog.get(getContext()).getEndroits()) {
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(markeur.getmLatitude(), markeur.getmLongitude())));
+                    }
+                }
 
 
                 if (actualMode == Mode.Modification) {
@@ -96,39 +117,14 @@ public class MapsFragment extends SupportMapFragment {
                             MarkerOptions marker = new MarkerOptions().position(latLng);
                             marker.draggable(false);
                             mMap.addMarker(marker);
-                            ApparaitreDialogue();
-                        }
 
-                        private void ApparaitreDialogue() {
-                            LayoutInflater factory = LayoutInflater.from(getContext());
+                            mEndroit.setmLatitude(latLng.latitude);
+                            mEndroit.setmLongitude(latLng.longitude);
 
-                            final View textEntryView = factory.inflate(R.layout.dialogue_ajout_layout, null);
+                            AjoutDialogueFragment dialog = AjoutDialogueFragment.newInstance(mEndroit.getmNom(), mEndroit.getmDescription());
 
-                            final EditText nom = (EditText) textEntryView.findViewById(R.id.nom_endroit);
-                            final EditText descriptiopn = (EditText) textEntryView.findViewById(R.id.description_endroit);
-
-
-                            nom.setText("Nom de l'endroit : ", TextView.BufferType.EDITABLE);
-                            descriptiopn.setText("Description : ", TextView.BufferType.EDITABLE);
-
-                            final AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-                            alert.setIcon(R.drawable.icon).setTitle("Nouvelle endroit:").setView(textEntryView).setPositiveButton("OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog,
-                                                            int whichButton) {
-
-                                            Log.i("AlertDialog","TextEntry 1 Entered " + nom.getText().toString());
-                                            Log.i("AlertDialog","TextEntry 2 Entered " + descriptiopn.getText().toString());
-                                            mCallBacks.onChangeMode(Mode.Aucun);
-                                        }
-                                    }).setNegativeButton("Annuler",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog,
-                                                            int whichButton) {
-                                          dialog.dismiss();
-                                        }
-                                    });
-                            alert.show();
+                            dialog.setTargetFragment(MapsFragment.this, REQUEST_CODE);
+                            dialog.show(getFragmentManager(), DIALOG_TAG);
                         }
                     });
                 }

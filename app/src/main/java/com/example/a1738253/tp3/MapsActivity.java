@@ -44,11 +44,17 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
                 actualMode = Mode.Modification;
                 break;
                 default:
+                    setTopFragment(new AucunModeFragment());
+                    actualMode = Mode.Aucun;
                     break;
         }
     }
 
-    public Mode getActualMode() {
-        return actualMode;
+    @Override
+    public Mode getMode() {
+        if (actualMode != null)
+            return actualMode;
+        else
+            return Mode.Aucun;
     }
 }
