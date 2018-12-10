@@ -72,8 +72,15 @@ public class MapsFragment extends SupportMapFragment {
                     for (Endroit markeur: EndroitLog.get(getContext()).getEndroits()) {
                         mMap.addMarker(new MarkerOptions().position(new LatLng(markeur.getmLatitude(), markeur.getmLongitude())));
                     }
-                }
 
+                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            mCallBacks.onChangeMode(Mode.Information);
+                            return true;
+                        }
+                    });
+                }
 
                 if (actualMode == Mode.Modification) {
 
@@ -128,14 +135,6 @@ public class MapsFragment extends SupportMapFragment {
                         }
                     });
                 }
-
-                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
-                        mCallBacks.onChangeMode(Mode.Information);
-                        return true;
-                    }
-                });
             }
         });
     }
