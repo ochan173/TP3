@@ -58,7 +58,7 @@ public class MapsFragment extends SupportMapFragment {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
+        final UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
 
         mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
 
@@ -70,7 +70,8 @@ public class MapsFragment extends SupportMapFragment {
                 if (actualMode == Mode.Aucun)
                 {
                     for (Endroit markeur: EndroitLog.get(getContext()).getEndroits()) {
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(markeur.getmLatitude(), markeur.getmLongitude())));
+                        mMap.addMarker(new MarkerOptions().position(new
+                                LatLng(markeur.getmLatitude(), markeur.getmLongitude())));
                     }
 
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -96,7 +97,9 @@ public class MapsFragment extends SupportMapFragment {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
                             for (Endroit endroit: EndroitLog.get(getContext()).getEndroits()) {
-                                Marker marqueur = mMap.addMarker(new MarkerOptions().position(new LatLng(endroit.getmLatitude(), endroit.getmLongitude())));
+                                Marker marqueur = mMap.addMarker(new MarkerOptions()
+                                        .position(new LatLng(endroit.getmLatitude(),
+                                                endroit.getmLongitude())));
                                 if(marqueur != marker)
                                     marqueur.setVisible(false);
                             }
@@ -117,6 +120,8 @@ public class MapsFragment extends SupportMapFragment {
                         @Override
                         public void onMarkerDragEnd(Marker marker) {
                            //EndroitLog.get(getContext()).updateEndroit();
+                            EndroitLog.get(getContext()).updateEndroit(EndroitLog.get(getContext())
+                                    .getEndroit(endroitID));
                         }
                     });
                 }
@@ -131,7 +136,8 @@ public class MapsFragment extends SupportMapFragment {
                             mEndroit.setmLatitude(latLng.latitude);
                             mEndroit.setmLongitude(latLng.longitude);
 
-                            AjoutDialogueFragment dialog = AjoutDialogueFragment.newInstance(mEndroit.getmNom(), mEndroit.getmDescription());
+                            AjoutDialogueFragment dialog = AjoutDialogueFragment.
+                                    newInstance(mEndroit.getmNom(), mEndroit.getmDescription());
 
                             dialog.setTargetFragment(MapsFragment.this, REQUEST_CODE);
                             dialog.show(getFragmentManager(), DIALOG_TAG);
