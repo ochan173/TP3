@@ -83,6 +83,16 @@ public class MapsFragment extends SupportMapFragment {
                             MarkerOptions marker = new MarkerOptions().position(latLng);
                             marker.draggable(true);
                             mMap.addMarker(marker);
+
+                            mEndroit.setmLatitude(latLng.latitude);
+                            mEndroit.setmLongitude(latLng.longitude);
+
+                            AjoutDialogueFragment dialog = com.example.a1738253.tp3.
+                                    ModificationDialogueFragment.
+                                    newInstance(mEndroit.getmNom(), mEndroit.getmDescription());
+
+                            dialog.setTargetFragment(MapsFragment.this, REQUEST_CODE);
+                            dialog.show(getFragmentManager(), DIALOG_TAG);
                         }
                     });
 

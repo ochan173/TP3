@@ -19,7 +19,7 @@ import com.example.a1738253.tp3.Modele.Mode;
 import java.util.Date;
 import java.util.UUID;
 
-public class AjoutDialogueFragment extends DialogFragment {
+public class ModificationDialogueFragment extends DialogFragment {
 
     private static final String ARG_ENDROIT_ID = "endroit_id";
     private static final String ARG_NOM = "nom";
