@@ -2,6 +2,10 @@ package com.example.a1738253.tp3.Modele;
 
 import java.util.UUID;
 
+/**
+ * Classe qui gère la structure d'un endroit.
+ * @author Yanick Bellavance et Olivier Chan
+ */
 public class Endroit {
 
     private UUID mId;
@@ -10,6 +14,10 @@ public class Endroit {
     private double mLatitude;
     private double mLongitude;
 
+    /**
+     * Constructruit un endroit à partir d'un UUID
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public Endroit(){this(UUID.randomUUID());}
 
     public UUID getmId() {

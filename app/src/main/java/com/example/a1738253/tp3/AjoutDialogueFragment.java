@@ -19,6 +19,10 @@ import com.example.a1738253.tp3.Modele.EndroitLog;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * Classe du dialogue d'ajout.
+ * @author Yanick Bellavance et Olivier Chan
+ */
 public class AjoutDialogueFragment extends DialogFragment {
 
     private static final String ARG_ENDROIT_ID = "endroit_id";
@@ -28,8 +32,13 @@ public class AjoutDialogueFragment extends DialogFragment {
     private EditText mNom;
     private EditText mDescription;
 
-
-    public  static  AjoutDialogueFragment newInstance(UUID endroitID){
+    /**
+     * Crée une nouvelle instance d'AjoutDialogueFragment à partir d'un id.
+     * @param endroitID id de l'endroit à ajouter
+     * @return retourne un AjoutDialogueFragment
+     * @author Yanick Bellavance et Olivier Chan
+     */
+    public static AjoutDialogueFragment newInstance(UUID endroitID){
         Bundle args = new Bundle();
         args.putSerializable(ARG_ENDROIT_ID, endroitID);
 
@@ -67,7 +76,14 @@ public class AjoutDialogueFragment extends DialogFragment {
                 }).create();
     }
 
-
+    /**
+     * Envoit le résultat de la boite de dialogue.
+     * @param resultCode Résultat du dialogue, dépendant si l'utilisateur donne un réponde positive
+     * ou négative (OK ou Annuler)
+     * @param nom Nom de l'endroit
+     * @param description description de l'endroit
+     * @author Yanick Bellavance et Olivier Chan
+     */
     private void sendResult(int resultCode, String nom, String description)
     {
         if (getTargetFragment() == null){

@@ -10,14 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.a1738253.tp3.Modele.Endroit;
 import com.example.a1738253.tp3.Modele.EndroitLog;
 import com.example.a1738253.tp3.Modele.Mode;
-
 import java.util.UUID;
 
+/**
+ * Classe qui gère le mode modification.
+ * @author Yanick Bellavance et Olivier Chan
+ */
 public class ModificationFragment extends Fragment {
+
     private static final String ARG_ENDROIT_ID = "endroit_id";
 
     private Endroit mEndroit;
@@ -27,6 +30,12 @@ public class ModificationFragment extends Fragment {
     private Button mDétailsButton;
     private MapsFragment.CallBacks mode;
 
+    /**
+     * Crée une nouvelle instance de ModificationFragment à partir d'un id
+     * @param id id de l'endroit
+     * @return retourne une nouvelle instance de ModificationFragment
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public static ModificationFragment NewInstance(UUID id){
 
         Bundle args = new Bundle();

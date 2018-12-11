@@ -9,13 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-
 import com.example.a1738253.tp3.Modele.Endroit;
-import com.example.a1738253.tp3.Modele.EndroitLog;
 import com.example.a1738253.tp3.Modele.Mode;
-
-import java.util.UUID;
 
 public class AjoutModeFragment extends Fragment {
     private static final String ARG_ENDROIT_ID = "endroit_id";
@@ -24,6 +19,11 @@ public class AjoutModeFragment extends Fragment {
     private Button mAnnulerButton;
     private MapsFragment.CallBacks mode;
 
+    /**
+     * Crée une nouvelle instance d'AjoutModeFragment.
+     * @return retourne une nouvelle instance d'AjoutModeFragment
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public static AjoutModeFragment NewInstance(){
 
         Bundle args = new Bundle();
@@ -49,9 +49,6 @@ public class AjoutModeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
-
-        //mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
     }
 
     @Nullable

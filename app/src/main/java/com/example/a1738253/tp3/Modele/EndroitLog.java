@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Classe qui gère les endroits.
+ * @author Yanick Bellavance et Olivier Chan
+ */
 public class EndroitLog {
 
     private static EndroitLog sEndroitLog;
@@ -19,6 +23,11 @@ public class EndroitLog {
 
     private ContentValues cv = new ContentValues();
 
+    /**
+     * Construit EndroitLog à partir de la base de données à partir d'un contexte.
+     * @param context contexte
+     * @author Yanick Bellavance et Olivier Chan
+     */
     private EndroitLog(Context context)
     {
         mDatabase = new EndroitBaseHelper(context.getApplicationContext()).getWritableDatabase();
@@ -71,12 +80,22 @@ public class EndroitLog {
         }
     }
 
+    /**
+     * Ajoute un endroit à la base de données.
+     * @param e endroit a ajouter
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public void AddEndroit(Endroit e)
     {
         getContentValues(e);
         mDatabase.insert(EndroitDBSchema.EndroitTable.NAME, null, cv);
     }
 
+    /**
+     * Update la base de données en modifiant l'endroit voulu.
+     * @param c endroit à modifier
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public  void  updateEndroit(Endroit c)
     {
         getContentValues(c);

@@ -1,12 +1,9 @@
 package com.example.a1738253.tp3;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-
 import com.example.a1738253.tp3.Modele.Endroit;
 import com.example.a1738253.tp3.Modele.EndroitLog;
 import com.example.a1738253.tp3.Modele.Mode;
@@ -19,6 +16,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.UUID;
 
+/**
+ * Classe qui gère la map
+ * @author Yanick Bellavance et Olivier Chan
+ */
 public class MapsFragment extends SupportMapFragment {
 
     private  static  final String ARG_ENDROIT_ID = "endroit_id";
@@ -31,6 +32,10 @@ public class MapsFragment extends SupportMapFragment {
     private Endroit mEndroit;
     private Mode actualMode;
 
+    /**
+     * Interface de gestion des modes de l'application.
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public interface CallBacks
     {
         void onChangeMode(Mode mode, String id);
@@ -50,6 +55,11 @@ public class MapsFragment extends SupportMapFragment {
         mCallBacks = null;
     }
 
+    /**
+     * Crée une nouvelle instance de MapsFragment à partir d'un id.
+     * @param id id d'un endroit sous forme de String
+     * @return retourne une nouvelle instance de Mapsfragment
+     */
     public static MapsFragment newInstance1(String id)
     {
         Bundle args = new Bundle();
@@ -59,9 +69,7 @@ public class MapsFragment extends SupportMapFragment {
         fragment.setArguments(args);
 
         return  fragment;
-
     }
-
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -91,12 +99,12 @@ public class MapsFragment extends SupportMapFragment {
                 mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
+
                         if (actualMode == Mode.Aucun)
                         {
 
                         }
-
-                        if (actualMode == Mode.Ajout)
+                        else if (actualMode == Mode.Ajout)
                         {
                             Endroit e = new Endroit();
 
@@ -105,8 +113,6 @@ public class MapsFragment extends SupportMapFragment {
 
                             dialog.setTargetFragment(MapsFragment.this, REQUEST_CODE);
                             dialog.show(getFragmentManager(), DIALOG_TAG);
-
-
 
                             MarkerOptions marker = new MarkerOptions().position(latLng);
                             marker.draggable(false);
@@ -118,13 +124,11 @@ public class MapsFragment extends SupportMapFragment {
                             EndroitLog.get(getContext()).AddEndroit(e);
                             mCallBacks.onChangeMode(Mode.Aucun, null);
                         }
-
-                        if (actualMode == Mode.Information)
+                        else if (actualMode == Mode.Information)
                         {
 
                         }
-
-                        if (actualMode == Mode.Modification)
+                        else if (actualMode == Mode.Modification)
                         {
                             MarkerOptions marker = new MarkerOptions().position(latLng);
                             marker.draggable(true);
@@ -175,23 +179,22 @@ public class MapsFragment extends SupportMapFragment {
                     }
                 });
 
+                mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+                    @Override
+                    public void onMarkerDragStart(Marker marker) {
 
+                    }
 
-                    mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-                        @Override
-                        public void onMarkerDragStart(Marker marker) {
-                        }
+                    @Override
+                    public void onMarkerDrag(Marker marker) {
 
-                        @Override
-                        public void onMarkerDrag(Marker marker) {
-                        }
+                    }
 
-                        @Override
-                        public void onMarkerDragEnd(Marker marker) {
-                            EndroitLog.get(getContext()).updateEndroit(EndroitLog.get(getContext())
-                                    .getEndroit(endroitID));
-                        }
-                    });
+                    @Override
+                    public void onMarkerDragEnd(Marker marker) {
+                        EndroitLog.get(getContext()).updateEndroit(EndroitLog.get(getContext())
+                                .getEndroit(endroitID));
+                    }});
                 }
             });
         }
@@ -201,12 +204,9 @@ public class MapsFragment extends SupportMapFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK)
             return;
-
-        if (resultCode == REQUEST_CODE)
+        else if (resultCode == REQUEST_CODE)
         {
 
         }
     }
 }
-
-

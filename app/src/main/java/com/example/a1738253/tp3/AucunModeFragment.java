@@ -10,24 +10,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.example.a1738253.tp3.Modele.Endroit;
 import com.example.a1738253.tp3.Modele.EndroitLog;
 import com.example.a1738253.tp3.Modele.Mode;
 
-import java.util.UUID;
-
+/**
+ * Classe du fragment AucunMode, qui gère le mode AucunMode.
+ * @author Yanick Bellavance et Olivier Chan
+ */
 public class AucunModeFragment extends Fragment{
 
     private TextView mNbEndroits;
     private Button mAjoutButton;
     private MapsFragment.CallBacks mode;
 
-
+    /**
+     * Crée une nouvelle instance d'AucunModeFragment.
+     * @return retourne une instance d'AucunModeFragment
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public static AucunModeFragment NewInstance(){
 
         Bundle args = new Bundle();
-        //args.putSerializable(ARG_ENDROIT_ID, id);
 
         AucunModeFragment fragment = new AucunModeFragment();
         fragment.setArguments(args);
@@ -61,7 +64,7 @@ public class AucunModeFragment extends Fragment{
 
        String nbEndroits = String.valueOf(EndroitLog.get(getContext()).getNbEndroits());
 
-       if (nbEndroits == "")
+       if (nbEndroits.equals(""))
            nbEndroits = "0";
 
        mNbEndroits = v.findViewById(R.id.nb_endroits);

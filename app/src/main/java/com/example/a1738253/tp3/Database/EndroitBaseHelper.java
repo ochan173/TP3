@@ -5,15 +5,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * 
+ * Classe de modification de la base de données.
+ * @author Yanick Bellavance et Olivier Chan
  */
 public class EndroitBaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "endroitBase.db";
     private static final int VERSION = 1;
 
+    /**
+     * Constructeur de EndroitBaseHelper
+     * @param context contexte
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public EndroitBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
-}
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -29,7 +35,6 @@ public class EndroitBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        // TODO faire la requette d'upgrade
     }
-
 }

@@ -7,16 +7,26 @@ import com.example.a1738253.tp3.Modele.Endroit;
 
 import java.util.UUID;
 
+/**
+ * Classe de récupération des données.
+ * @author Yanick Bellavance et Olivier Chan
+ */
 public class EndroitCursorWrapper extends CursorWrapper {
+
     /**
      * Creates a cursor wrapper.
-     *
      * @param cursor The underlying cursor to wrap.
+     * @author Yanick Bellavance et Olivier Chan
      */
     public EndroitCursorWrapper(Cursor cursor) {
         super(cursor);
     }
 
+    /**
+     * Obteint un endroit dans la base de données.
+     * @return Retourne un endroit
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public Endroit getEndroit()
     {
         String uuidString = getString(getColumnIndex(EndroitDBSchema.EndroitTable.Cols.UUID));

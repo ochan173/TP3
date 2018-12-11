@@ -2,33 +2,24 @@ package com.example.a1738253.tp3;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-
-import com.example.a1738253.tp3.Modele.Endroit;
-import com.example.a1738253.tp3.Modele.EndroitLog;
 import com.example.a1738253.tp3.Modele.Mode;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.util.UUID;
 
+/**
+ * Classe qui gère les fragments et les changements de mode.
+ * @author Yanick Bellavance et Olivier Chan
+ */
 public class MapsActivity extends DualFragementActivity implements MapsFragment.CallBacks {
 
     private static  final  String EXTRA_ENDROIT_ID = "com.cstjean.a1738253.tp3";
 
-    private GoogleMap mMap;
     private Mode actualMode = Mode.Ajout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        UUID endroitID = (UUID)getIntent().getSerializableExtra(MapsActivity.EXTRA_ENDROIT_ID);
 
         setTopFragment(AucunModeFragment.NewInstance());
         setMainFragment(MapsFragment.newInstance1(null));
@@ -64,6 +55,12 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
             return actualMode;
     }
 
+    /**
+     * Crée un nouvelle Intent à partir d'un contexte et du id d'un endroit
+     * @param context contexte
+     * @param endroit_id id d'un endroit
+     * @return retourne un Intent
+     */
     public static Intent newIntent(Context context, UUID endroit_id){
         Intent intent =  new Intent(context, MapsActivity.class);
         intent.putExtra(EXTRA_ENDROIT_ID, endroit_id);

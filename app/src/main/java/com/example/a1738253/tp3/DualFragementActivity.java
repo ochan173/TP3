@@ -5,6 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ * Classe qui gère les fragments, le MainFragment étant la map et le top les autres.
+ * @author Yanick Bellavance et Olivier Chan
+ */
 public abstract class DualFragementActivity extends AppCompatActivity {
 
     public void setTopFragment (Fragment fragment)
