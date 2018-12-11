@@ -17,27 +17,23 @@ import com.example.a1738253.tp3.Modele.Mode;
 
 import java.util.UUID;
 
-public class AucunModeFragment extends Fragment{
-
+public class AjoutModeFragment extends Fragment {
     private static final String ARG_ENDROIT_ID = "endroit_id";
 
     private Endroit mEndroit;
-    private TextView mNbEndroits;
-    private Button mAjoutButton;
+    private Button mAnnulerButton;
     private MapsFragment.CallBacks mode;
 
-
-    public static AucunModeFragment NewInstance(){
+    public static AjoutModeFragment NewInstance(UUID id){
 
         Bundle args = new Bundle();
-        //args.putSerializable(ARG_ENDROIT_ID, id);
+        args.putSerializable(ARG_ENDROIT_ID, id);
 
-        AucunModeFragment fragment = new AucunModeFragment();
+        AjoutModeFragment fragment = new AjoutModeFragment();
         fragment.setArguments(args);
 
         return fragment;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -51,7 +47,6 @@ public class AucunModeFragment extends Fragment{
         mode = null;
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,23 +58,16 @@ public class AucunModeFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View v = inflater.inflate(R.layout.aucun_mode_layout, container, false);
+        View v = inflater.inflate(R.layout.aucun_mode_layout, container, false);
 
-       String nbEndroits = String.valueOf(EndroitLog.get(getContext()).getNbEndroits());
 
-       if (nbEndroits == "")
-           nbEndroits = "0";
-
-       mNbEndroits = v.findViewById(R.id.nb_endroits);
-       mNbEndroits.setText(nbEndroits);
-
-       mAjoutButton = v.findViewById(R.id.ajout);
-       mAjoutButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               mode.onChangeMode(Mode.Ajout, mEndroit.getmId());
-           }
-       });
+        mAnnulerButton = v.findViewById(R.id.annuler);
+        mAnnulerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mode.onChangeMode(Mode.Aucun, mEndroit.getmId());
+            }
+        });
 
         return v;
     }

@@ -17,27 +17,26 @@ import com.example.a1738253.tp3.Modele.Mode;
 
 import java.util.UUID;
 
-public class AucunModeFragment extends Fragment{
-
+public class InformationFragment extends Fragment{
     private static final String ARG_ENDROIT_ID = "endroit_id";
 
     private Endroit mEndroit;
-    private TextView mNbEndroits;
-    private Button mAjoutButton;
+    private TextView mNom;
+    private TextView mDescription;
+    private Button mModifierButton;
+    private Button mSupprimerButton;
     private MapsFragment.CallBacks mode;
 
-
-    public static AucunModeFragment NewInstance(){
+    public static InformationFragment NewInstance(UUID id){
 
         Bundle args = new Bundle();
-        //args.putSerializable(ARG_ENDROIT_ID, id);
+        args.putSerializable(ARG_ENDROIT_ID, id);
 
-        AucunModeFragment fragment = new AucunModeFragment();
+        InformationFragment fragment = new InformationFragment();
         fragment.setArguments(args);
 
         return fragment;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -51,7 +50,6 @@ public class AucunModeFragment extends Fragment{
         mode = null;
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,23 +61,29 @@ public class AucunModeFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View v = inflater.inflate(R.layout.aucun_mode_layout, container, false);
+        View v = inflater.inflate(R.layout.aucun_mode_layout, container, false);
 
-       String nbEndroits = String.valueOf(EndroitLog.get(getContext()).getNbEndroits());
+        mNom = v.findViewById(R.id.nom_endroit);
+        mNom.setText(mEndroit.getmNom());
 
-       if (nbEndroits == "")
-           nbEndroits = "0";
+        mDescription = v.findViewById(R.id.description_endroit);
+        mDescription.setText(mEndroit.getmDescription());
 
-       mNbEndroits = v.findViewById(R.id.nb_endroits);
-       mNbEndroits.setText(nbEndroits);
+        mModifierButton = v.findViewById(R.id.modifier);
+        mModifierButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mode.onChangeMode(Mode.Modification, mEndroit.getmId());
+            }
+        });
 
-       mAjoutButton = v.findViewById(R.id.ajout);
-       mAjoutButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               mode.onChangeMode(Mode.Ajout, mEndroit.getmId());
-           }
-       });
+        mSupprimerButton = v.findViewById(R.id.modifier);
+        mSupprimerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mode.onChangeMode(Mode.Aucun, mEndroit.getmId());
+            }
+        });
 
         return v;
     }

@@ -50,8 +50,9 @@ public class EndroitLog {
         return mEndroits;
     }
 
-    public int getNbEndroits(){
-
+    public int getNbEndroits()
+    {
+        return getEndroits().size();
     }
 
     public  Endroit getEndroit(UUID id)
