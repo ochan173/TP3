@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre d'endoits visités"/>
+        android:text="@string/nb_endroits_title"/>
 
         <TextView
             android:id="@+id/nb_endroits_visite"
@@ -22,6 +22,6 @@
         android:id="@+id/ajouter_endroit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ajouter"/>
+        android:text="@string/btn_ajouter_title"/>
 
 </LinearLayout>

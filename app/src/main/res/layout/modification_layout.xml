@@ -12,12 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/annuler"
-        android:text="ANNULER"/>
+        android:text="@string/btn_annuler_title"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/détails"
-        android:text="DÉTAILS"/>
+        android:text="@string/btn_details_title"/>
 
 </LinearLayout>

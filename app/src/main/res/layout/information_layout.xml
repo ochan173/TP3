@@ -27,12 +27,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/supprimer"
-        android:text="SUPPRIMER"/>
+        android:text="@string/btn_suprimer_title"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/modifier"
-        android:text="MODIFIER"/>
+        android:text="@string/btn_modifier_title"/>
 
 </LinearLayout>

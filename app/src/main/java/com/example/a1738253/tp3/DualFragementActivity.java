@@ -27,6 +27,8 @@ public abstract class DualFragementActivity extends AppCompatActivity {
             fragment = newFragment;
             fm.beginTransaction().add(resId, fragment).commit();
         }
+        else
+            fm.beginTransaction().replace(resId, newFragment).commit();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

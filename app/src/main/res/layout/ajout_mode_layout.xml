@@ -6,12 +6,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tapper l'endroit que vous avez visité:"/>
+        android:text="@string/ajout_endroit_title"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/annuler"
-        android:text="ANNULER"/>
+        android:text="@string/btn_annuler_title"/>
 
 </LinearLayout>
