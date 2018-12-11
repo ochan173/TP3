@@ -71,7 +71,7 @@ public class EndroitLog {
         }
     }
 
-    public  void AddEndroit(Endroit e)
+    public void AddEndroit(Endroit e)
     {
         getContentValues(e);
         mDatabase.insert(EndroitDBSchema.EndroitTable.NAME, null, cv);

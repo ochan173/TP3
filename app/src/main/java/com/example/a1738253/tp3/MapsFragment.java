@@ -1,7 +1,9 @@
 package com.example.a1738253.tp3;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -68,7 +70,6 @@ public class MapsFragment extends SupportMapFragment {
         if(getArguments().getSerializable(ARG_ENDROIT_ID) != null)
             endroitID = UUID.fromString(getArguments().getSerializable(ARG_ENDROIT_ID).toString());
 
-
         getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
@@ -80,14 +81,6 @@ public class MapsFragment extends SupportMapFragment {
                         mMap.addMarker(new MarkerOptions().position(new
                                 LatLng(markeur.getmLatitude(), markeur.getmLongitude())));
                     }
-
-                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(Marker marker) {
-                            mCallBacks.onChangeMode(Mode.Information, mEndroit.getmId().toString());
-                            return true;
-                        }
-                    });
                 }
 
                 if (actualMode == Mode.Information)
@@ -95,10 +88,44 @@ public class MapsFragment extends SupportMapFragment {
                     mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
                 }
 
-                if (actualMode == Mode.Modification) {
-                    mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                        @Override
-                        public void onMapClick(LatLng latLng) {
+                mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        if (actualMode == Mode.Aucun)
+                        {
+
+                        }
+
+                        if (actualMode == Mode.Ajout)
+                        {
+                            Endroit e = new Endroit();
+
+                            AjoutDialogueFragment dialog = AjoutDialogueFragment.
+                                    newInstance(e.getmId());
+
+                            dialog.setTargetFragment(MapsFragment.this, REQUEST_CODE);
+                            dialog.show(getFragmentManager(), DIALOG_TAG);
+
+
+
+                            MarkerOptions marker = new MarkerOptions().position(latLng);
+                            marker.draggable(false);
+                            mMap.addMarker(marker);
+
+                            e.setmLatitude(latLng.latitude);
+                            e.setmLongitude(latLng.longitude);
+
+                            EndroitLog.get(getContext()).AddEndroit(e);
+                            mCallBacks.onChangeMode(Mode.Aucun, null);
+                        }
+
+                        if (actualMode == Mode.Information)
+                        {
+
+                        }
+
+                        if (actualMode == Mode.Modification)
+                        {
                             MarkerOptions marker = new MarkerOptions().position(latLng);
                             marker.draggable(true);
                             mMap.addMarker(marker);
@@ -113,11 +140,26 @@ public class MapsFragment extends SupportMapFragment {
                             dialog.setTargetFragment(MapsFragment.this, REQUEST_CODE);
                             dialog.show(getFragmentManager(), DIALOG_TAG);
                         }
-                    });
+                    }
+                });
 
-                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(Marker marker) {
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+
+                        if (actualMode == Mode.Aucun)
+                        {
+                            mCallBacks.onChangeMode(Mode.Information, mEndroit.getmId().toString());
+                            return true;
+                        }
+
+                        if (actualMode == Mode.Information)
+                        {
+
+                        }
+
+                        if (actualMode == Mode.Modification)
+                        {
                             for (Endroit endroit: EndroitLog.get(getContext()).getEndroits()) {
                                 Marker marqueur = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(endroit.getmLatitude(),
@@ -128,7 +170,12 @@ public class MapsFragment extends SupportMapFragment {
                             marker.isDraggable();
                             return true;
                         }
-                    });
+
+                        return false;
+                    }
+                });
+
+
 
                     mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
                         @Override
@@ -146,28 +193,20 @@ public class MapsFragment extends SupportMapFragment {
                         }
                     });
                 }
-                else if(actualMode == Mode.Ajout) {
-                    mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                        @Override
-                        public void onMapClick(LatLng latLng) {
+            });
+        }
 
-                            AjoutDialogueFragment dialog = AjoutDialogueFragment.
-                                    newInstance(mEndroit.getmNom(), mEndroit.getmDescription());
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK)
+            return;
 
-                            dialog.setTargetFragment(MapsFragment.this, REQUEST_CODE);
-                            dialog.show(getFragmentManager(), DIALOG_TAG);
+        if (resultCode == REQUEST_CODE)
+        {
 
-                            MarkerOptions marker = new MarkerOptions().position(latLng);
-                            marker.draggable(false);
-                            mMap.addMarker(marker);
-
-//                            mEndroit.setmLatitude(latLng.latitude);
-        //                    mEndroit.setmLongitude(latLng.longitude);
-                        }
-                    });
-                }
-            }
-        });
+        }
     }
 }
+
 
