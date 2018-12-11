@@ -22,17 +22,15 @@ public abstract class DualFragementActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(resId);
 
-
         if (fragment == null)
+        {
             fragment = newFragment;
-        fm.beginTransaction().add(resId, fragment).commit();
+            fm.beginTransaction().add(resId, fragment).commit();
+        }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dual_fragment_activity);
-
     }
-
-
 }

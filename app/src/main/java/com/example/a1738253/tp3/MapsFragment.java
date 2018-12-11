@@ -31,7 +31,7 @@ public class MapsFragment extends SupportMapFragment {
 
     public interface CallBacks
     {
-        void onChangeMode(Mode mode, UUID id);
+        void onChangeMode(Mode mode, String id);
         Mode getMode();
     }
 
@@ -84,7 +84,7 @@ public class MapsFragment extends SupportMapFragment {
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
-                            mCallBacks.onChangeMode(Mode.Information, mEndroit.getmId());
+                            mCallBacks.onChangeMode(Mode.Information, mEndroit.getmId().toString());
                             return true;
                         }
                     });
@@ -150,18 +150,19 @@ public class MapsFragment extends SupportMapFragment {
                     mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                         @Override
                         public void onMapClick(LatLng latLng) {
-                            MarkerOptions marker = new MarkerOptions().position(latLng);
-                            marker.draggable(false);
-                            mMap.addMarker(marker);
-
-                            mEndroit.setmLatitude(latLng.latitude);
-                            mEndroit.setmLongitude(latLng.longitude);
 
                             AjoutDialogueFragment dialog = AjoutDialogueFragment.
                                     newInstance(mEndroit.getmNom(), mEndroit.getmDescription());
 
                             dialog.setTargetFragment(MapsFragment.this, REQUEST_CODE);
                             dialog.show(getFragmentManager(), DIALOG_TAG);
+
+                            MarkerOptions marker = new MarkerOptions().position(latLng);
+                            marker.draggable(false);
+                            mMap.addMarker(marker);
+
+//                            mEndroit.setmLatitude(latLng.latitude);
+        //                    mEndroit.setmLongitude(latLng.longitude);
                         }
                     });
                 }

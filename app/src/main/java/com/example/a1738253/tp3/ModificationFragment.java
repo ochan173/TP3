@@ -61,7 +61,7 @@ public class ModificationFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.aucun_mode_layout, container, false);
+        View v = inflater.inflate(R.layout.modification_layout, container, false);
 
         mNbEndroits = v.findViewById(R.id.nb_endroits);
         mNbEndroits.setText(EndroitLog.get(getContext()).getNbEndroits());
@@ -70,7 +70,7 @@ public class ModificationFragment extends Fragment {
         mAnnulerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Aucun, mEndroit.getmId());
+                mode.onChangeMode(Mode.Aucun, mEndroit.getmId().toString());
             }
         });
 
@@ -78,7 +78,7 @@ public class ModificationFragment extends Fragment {
         mSauvegarderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Information, mEndroit.getmId());
+                mode.onChangeMode(Mode.Information, mEndroit.getmId().toString());
             }
         });
 

@@ -24,10 +24,9 @@ public class AjoutModeFragment extends Fragment {
     private Button mAnnulerButton;
     private MapsFragment.CallBacks mode;
 
-    public static AjoutModeFragment NewInstance(UUID id){
+    public static AjoutModeFragment NewInstance(){
 
         Bundle args = new Bundle();
-        args.putSerializable(ARG_ENDROIT_ID, id);
 
         AjoutModeFragment fragment = new AjoutModeFragment();
         fragment.setArguments(args);
@@ -50,22 +49,21 @@ public class AjoutModeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
+        //UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
 
-        mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
+        //mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.aucun_mode_layout, container, false);
-
+        View v = inflater.inflate(R.layout.ajout_mode_layout, container, false);
 
         mAnnulerButton = v.findViewById(R.id.annuler);
         mAnnulerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Aucun, mEndroit.getmId());
+                mode.onChangeMode(Mode.Aucun, null);
             }
         });
 

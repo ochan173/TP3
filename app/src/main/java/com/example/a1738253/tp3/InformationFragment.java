@@ -61,7 +61,7 @@ public class InformationFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.aucun_mode_layout, container, false);
+        View v = inflater.inflate(R.layout.information_layout, container, false);
 
         mNom = v.findViewById(R.id.nom_endroit);
         mNom.setText(mEndroit.getmNom());
@@ -73,7 +73,7 @@ public class InformationFragment extends Fragment{
         mModifierButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Modification, mEndroit.getmId());
+                mode.onChangeMode(Mode.Modification, mEndroit.getmId().toString());
             }
         });
 
@@ -81,7 +81,7 @@ public class InformationFragment extends Fragment{
         mSupprimerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Aucun, mEndroit.getmId());
+                mode.onChangeMode(Mode.Aucun, mEndroit.getmId().toString());
             }
         });
 

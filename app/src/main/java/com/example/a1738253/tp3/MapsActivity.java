@@ -35,11 +35,11 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
     }
 
     @Override
-    public void onChangeMode(Mode mode, UUID id) {
+    public void onChangeMode(Mode mode, String id) {
         switch (mode)
         {
             case Ajout:
-                setTopFragment(AjoutModeFragment.NewInstance(id));
+                setTopFragment(AjoutModeFragment.NewInstance());
                 actualMode = Mode.Ajout;
                 break;
             case Aucun:
@@ -47,16 +47,14 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
                 actualMode = Mode.Aucun;
                 break;
             case Information:
-                setTopFragment(InformationFragment.NewInstance(id));
+                setTopFragment(InformationFragment.NewInstance(UUID.fromString(id)));
                 actualMode = Mode.Information;
                 break;
             case Modification:
-                setTopFragment(ModificationFragment.NewInstance(id));
+                setTopFragment(ModificationFragment.NewInstance(UUID.fromString(id)));
                 actualMode = Mode.Modification;
                 break;
                 default:
-                    setTopFragment(AucunModeFragment.NewInstance());
-                    actualMode = Mode.Aucun;
                     break;
         }
     }

@@ -19,9 +19,6 @@ import java.util.UUID;
 
 public class AucunModeFragment extends Fragment{
 
-    private static final String ARG_ENDROIT_ID = "endroit_id";
-
-    private Endroit mEndroit;
     private TextView mNbEndroits;
     private Button mAjoutButton;
     private MapsFragment.CallBacks mode;
@@ -55,9 +52,6 @@ public class AucunModeFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
-
-        mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
     }
 
     @Nullable
@@ -77,7 +71,7 @@ public class AucunModeFragment extends Fragment{
        mAjoutButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               mode.onChangeMode(Mode.Ajout, mEndroit.getmId());
+               mode.onChangeMode(Mode.Ajout, null);
            }
        });
 
