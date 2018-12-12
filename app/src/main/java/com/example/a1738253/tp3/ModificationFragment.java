@@ -26,7 +26,6 @@ public class ModificationFragment extends Fragment {
     private  static final String DIALOG_TAG = "DialogTag";
 
     private Endroit mEndroit;
-    private TextView mNbEndroits;
     private Button mAnnulerButton;
     private Button mSauvegarderButton;
     private Button mDétailsButton;

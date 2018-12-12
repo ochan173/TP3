@@ -15,7 +15,7 @@ public class Endroit {
     private double mLongitude;
 
     /**
-     * Constructruit un endroit à partir d'un UUID
+     * Constructruit un endroit à partir d'UUID aléatoire
      * @author Yanick Bellavance et Olivier Chan
      */
     public Endroit(){this(UUID.randomUUID());}
@@ -40,13 +40,13 @@ public class Endroit {
         return mLongitude;
     }
 
+    /**
+     * Constructruit un endroit à partir d'un UUID
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public Endroit(UUID id)
     {
         mId = id;
-    }
-
-    public void setmId(UUID mId) {
-        this.mId = mId;
     }
 
     public void setmNom(String mNom) {

@@ -1,10 +1,8 @@
 package com.example.a1738253.tp3;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import com.example.a1738253.tp3.Modele.Mode;
-import com.google.android.gms.maps.GoogleMap;
+
 import java.util.UUID;
 
 /**
@@ -13,9 +11,9 @@ import java.util.UUID;
  */
 public class MapsActivity extends DualFragementActivity implements MapsFragment.CallBacks {
 
-    private static  final  String EXTRA_ENDROIT_ID = "com.cstjean.a1738253.tp3";
-
-
+    /**
+     * Variable qui contient le mode actuel de l'application
+     */
     public static Mode actualMode;
 
     @Override
@@ -39,7 +37,7 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
             case Aucun:
                 actualMode = Mode.Aucun;
                 setTopFragment(AucunModeFragment.NewInstance());
-                MapsFragment.Refresh();
+                MapsFragment.Clear();
                 MapsFragment.AddAllMarkers(getBaseContext());
                 break;
             case Information:
@@ -53,17 +51,5 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
                 default:
                     break;
         }
-    }
-
-    /**
-     * Crée un nouvelle Intent à partir d'un contexte et du id d'un endroit
-     * @param context contexte
-     * @param endroit_id id d'un endroit
-     * @return retourne un Intent
-     */
-    public static Intent newIntent(Context context, UUID endroit_id){
-        Intent intent =  new Intent(context, MapsActivity.class);
-        intent.putExtra(EXTRA_ENDROIT_ID, endroit_id);
-        return  intent;
     }
 }

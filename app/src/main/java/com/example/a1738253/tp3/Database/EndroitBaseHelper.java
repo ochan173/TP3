@@ -35,6 +35,7 @@ public class EndroitBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // TODO faire la requette d'upgrade
+
     }
+
 }

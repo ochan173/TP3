@@ -19,8 +19,17 @@ import com.example.a1738253.tp3.Modele.Mode;
  */
 public class AucunModeFragment extends Fragment{
 
+    /**
+     * TextView pour le nombre d'endroits
+     */
     private TextView mNbEndroits;
+    /**
+     * Bouton pour ajouter un endroit
+     */
     private Button mAjoutButton;
+    /**
+     * Callback pour le mode actuel
+     */
     private MapsFragment.CallBacks mode;
 
     /**

@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.UUID;
 
 /**
- * Classe qui gère la map
+ * Classe qui gère la carte
  * @author Yanick Bellavance et Olivier Chan
  */
 public class MapsFragment extends SupportMapFragment {
@@ -26,10 +26,24 @@ public class MapsFragment extends SupportMapFragment {
     private static final int REQUEST_CODE = 0;
     private  static final String DIALOG_TAG = "DialogTag";
 
+    /**Contient le id d'un endroit
+     */
     private UUID endroitID;
+    /**
+     * variable qui contient la carte
+     */
     private static GoogleMap mMap;
+    /**
+     * Variable pour changer le mode
+     */
     private CallBacks mCallBacks;
+    /**
+     * Variable qui contient les informations d'un endroit
+     */
     private Endroit mEndroit;
+    /**
+     * Contient la position d'un marqueur
+     */
     private MarkerOptions mPosition;
 
     /**
@@ -54,8 +68,9 @@ public class MapsFragment extends SupportMapFragment {
     }
 
     /**
-     * Créer une nouvelle instance de MapsFragment à partir d'un id.
+     * Crée une nouvelle instance de MapsFragment à partir d'un id.
      * @param id id d'un endroit sous forme de String
+     * @author Yanick Bellavance et Olivier Chan
      * @return retourne une nouvelle instance de Mapsfragment
      */
     public static MapsFragment newInstance1(String id)
@@ -184,11 +199,20 @@ public class MapsFragment extends SupportMapFragment {
             });
         }
 
-    public static void Refresh()
+    /**
+     * Méthode qui supprime tous les marqueurs d'une carte
+     * @author Yanick Bellavance et Olivier Chan
+     */
+    public static void Clear()
     {
         mMap.clear();
     }
 
+    /**
+     * Méthode qui ajoute des marqueurs sur la carte
+     * @param context contexte du fragment
+     * @author Yanick Bellavance et Olivier Chan
+     */
     public static void AddAllMarkers(Context context)
     {
         for (Endroit markeur: EndroitLog.get(context).getEndroits()) {

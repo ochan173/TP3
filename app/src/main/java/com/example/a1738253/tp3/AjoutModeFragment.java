@@ -12,10 +12,15 @@ import android.widget.Button;
 import com.example.a1738253.tp3.Modele.Endroit;
 import com.example.a1738253.tp3.Modele.Mode;
 
+/**
+ * Classe qui gère le mode ajout.
+ * @author Yanick Bellavance et Olivier Chan
+ */
 public class AjoutModeFragment extends Fragment {
-    private static final String ARG_ENDROIT_ID = "endroit_id";
 
-    private Endroit mEndroit;
+    /**
+     * Bouton pour annuler l'ajout d'un endroit
+     */
     private Button mAnnulerButton;
     private MapsFragment.CallBacks mode;
 

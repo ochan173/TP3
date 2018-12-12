@@ -22,11 +22,29 @@ import java.util.UUID;
 public class InformationFragment extends Fragment{
     private static final String ARG_ENDROIT_ID = "endroit_id";
 
+    /**
+     * Variable qui contient les informations d'un endroit
+     */
     private Endroit mEndroit;
+    /**
+     * TextView pour le nom de l'endroit
+     */
     private TextView mNom;
+    /**
+     * TextView pour la description de l'endroit
+     */
     private TextView mDescription;
+    /**
+     * Bouton pour modifier l'endroit
+     */
     private Button mModifierButton;
+    /**
+     * Bouton pour supprimer l'endroit
+     */
     private Button mSupprimerButton;
+    /**
+     * CallBack pour le mode actuel
+     */
     private MapsFragment.CallBacks mode;
 
     /**

@@ -22,13 +22,24 @@ import java.util.UUID;
  */
 public class ModificationDialogueFragment extends DialogFragment {
 
-    private static final String ARG_ENDROIT_ID = "endroit_id";
     private static final String ARG_NOM = "nom";
     private static final String ARG_DESCRIPTION = "description";
 
+    /**
+     * EditText pour le nom de l'endroit
+     */
     private EditText mNom;
+    /**
+     * EditText pour la description de l'endroit
+     */
     private EditText mDescription;
+    /**
+     * Contient le nom de l'endroit
+     */
     private String Nom;
+    /**
+     * Contient la description de l'endroit
+     */
     private String Description;
 
     /**

@@ -30,7 +30,13 @@ public class AjoutDialogueFragment extends DialogFragment {
     public static final String EXTRA_NOM = "com.cstjean.1738253";
     public static final String EXTRA_DESCRIPTION = "com.cstjean.173825312";
 
+    /**
+     * EditText pour le nom de l'endroit
+     */
     private EditText mNom;
+    /**
+     * EditText pour la description de l'endroit
+     */
     private EditText mDescription;
 
     /**
@@ -38,15 +44,12 @@ public class AjoutDialogueFragment extends DialogFragment {
      * @return retourne un AjoutDialogueFragment
      * @author Yanick Bellavance et Olivier Chan
      */
-
     public static AjoutDialogueFragment newInstance(String nom, String description){
         Bundle args = new Bundle();
         args.putSerializable(ARG_NOM_ID, nom);
         args.putSerializable(ARG_DESCRIPTION_ID, description);
 
-        AjoutDialogueFragment fragment = new AjoutDialogueFragment();
-
-        return  fragment;
+        return  new AjoutDialogueFragment();
     }
 
     @NonNull
