@@ -22,6 +22,8 @@ import java.util.UUID;
 public class ModificationFragment extends Fragment {
 
     private static final String ARG_ENDROIT_ID = "endroit_id";
+    private static final int REQUEST_CODE = 0;
+    private  static final String DIALOG_TAG = "DialogTag";
 
     private Endroit mEndroit;
     private TextView mNbEndroits;
@@ -72,10 +74,7 @@ public class ModificationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.modification_layout, container, false);
 
-        mNbEndroits = v.findViewById(R.id.nb_endroits);
-        mNbEndroits.setText(EndroitLog.get(getContext()).getNbEndroits());
-
-        mAnnulerButton = v.findViewById(R.id.ajout);
+        mAnnulerButton = v.findViewById(R.id.annuler);
         mAnnulerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +82,7 @@ public class ModificationFragment extends Fragment {
             }
         });
 
-        mSauvegarderButton = v.findViewById(R.id.ajout);
+        mSauvegarderButton = v.findViewById(R.id.sauvegarder);
         mSauvegarderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,11 +90,15 @@ public class ModificationFragment extends Fragment {
             }
         });
 
-        mDétailsButton = v.findViewById(R.id.ajout);
+        mDétailsButton = v.findViewById(R.id.détails);
         mDétailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ModificationDialogueFragment dialog = ModificationDialogueFragment.
+                        newInstance(mEndroit.getmNom(), mEndroit.getmDescription());
 
+                dialog.setTargetFragment(ModificationFragment.this, REQUEST_CODE);
+                dialog.show(getFragmentManager(), DIALOG_TAG);
             }
         });
 

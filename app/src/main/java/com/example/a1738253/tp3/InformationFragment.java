@@ -85,11 +85,12 @@ public class InformationFragment extends Fragment{
             }
         });
 
-        mSupprimerButton = v.findViewById(R.id.modifier);
+        mSupprimerButton = v.findViewById(R.id.supprimer);
         mSupprimerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mode.onChangeMode(Mode.Aucun, mEndroit.getmId().toString());
+                EndroitLog.get(getContext()).RemoveEndroit(mEndroit);
+                mode.onChangeMode(Mode.Aucun, null);
             }
         });
 

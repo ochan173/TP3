@@ -91,6 +91,12 @@ public class EndroitLog {
         mDatabase.insert(EndroitDBSchema.EndroitTable.NAME, null, cv);
     }
 
+    public void RemoveEndroit(Endroit e)
+    {
+        getContentValues(e);
+        mDatabase.delete(EndroitDBSchema.EndroitTable.NAME, EndroitDBSchema.EndroitTable.Cols.UUID + " =? ", new String[]{ e.getmId().toString() });
+    }
+
     /**
      * Update la base de données en modifiant l'endroit voulu.
      * @param c endroit à modifier

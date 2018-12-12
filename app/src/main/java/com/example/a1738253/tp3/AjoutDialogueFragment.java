@@ -25,7 +25,8 @@ import java.util.UUID;
  */
 public class AjoutDialogueFragment extends DialogFragment {
 
-    private static final String ARG_ENDROIT_ID = "endroit_id";
+    private static final String ARG_NOM_ID = "nom_id";
+    private static final String ARG_DESCRIPTION_ID = "descritpion_id";
     public static final String EXTRA_NOM = "com.cstjean.1738253";
     public static final String EXTRA_DESCRIPTION = "com.cstjean.173825312";
 
@@ -34,13 +35,14 @@ public class AjoutDialogueFragment extends DialogFragment {
 
     /**
      * Crée une nouvelle instance d'AjoutDialogueFragment à partir d'un id.
-     * @param endroitID id de l'endroit à ajouter
      * @return retourne un AjoutDialogueFragment
      * @author Yanick Bellavance et Olivier Chan
      */
-    public static AjoutDialogueFragment newInstance(UUID endroitID){
+
+    public static AjoutDialogueFragment newInstance(String nom, String description){
         Bundle args = new Bundle();
-        args.putSerializable(ARG_ENDROIT_ID, endroitID);
+        args.putSerializable(ARG_NOM_ID, nom);
+        args.putSerializable(ARG_DESCRIPTION_ID, description);
 
         AjoutDialogueFragment fragment = new AjoutDialogueFragment();
 

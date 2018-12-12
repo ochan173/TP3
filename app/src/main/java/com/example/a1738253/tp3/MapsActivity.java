@@ -15,13 +15,16 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
 
     private static  final  String EXTRA_ENDROIT_ID = "com.cstjean.a1738253.tp3";
 
-    private Mode actualMode = Mode.Ajout;
+
+    public static Mode actualMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTopFragment(AucunModeFragment.NewInstance());
+        actualMode = Mode.Aucun;
+
         setMainFragment(MapsFragment.newInstance1(null));
     }
 
@@ -30,29 +33,26 @@ public class MapsActivity extends DualFragementActivity implements MapsFragment.
         switch (mode)
         {
             case Ajout:
-                setTopFragment(AjoutModeFragment.NewInstance());
                 actualMode = Mode.Ajout;
+                setTopFragment(AjoutModeFragment.NewInstance());
                 break;
             case Aucun:
-                setTopFragment(AucunModeFragment.NewInstance());
                 actualMode = Mode.Aucun;
+                setTopFragment(AucunModeFragment.NewInstance());
+                MapsFragment.Refresh();
+                MapsFragment.AddAllMarkers(getBaseContext());
                 break;
             case Information:
-                setTopFragment(InformationFragment.NewInstance(UUID.fromString(id)));
                 actualMode = Mode.Information;
+                setTopFragment(InformationFragment.NewInstance(UUID.fromString(id)));
                 break;
             case Modification:
-                setTopFragment(ModificationFragment.NewInstance(UUID.fromString(id)));
                 actualMode = Mode.Modification;
+                setTopFragment(ModificationFragment.NewInstance(UUID.fromString(id)));
                 break;
                 default:
                     break;
         }
-    }
-
-    @Override
-    public Mode getMode() {
-            return actualMode;
     }
 
     /**

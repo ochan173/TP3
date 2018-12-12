@@ -1,8 +1,10 @@
 package com.example.a1738253.tp3;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,7 +28,8 @@ public class ModificationDialogueFragment extends DialogFragment {
 
     private EditText mNom;
     private EditText mDescription;
-    private Endroit mEndroit;
+    private String Nom;
+    private String Description;
 
     /**
      * Crée une nouvelle instance de ModificationDialogueFragment à partir du nom et de la
@@ -48,9 +51,8 @@ public class ModificationDialogueFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        UUID endroitID = (UUID) getArguments().getSerializable(ARG_ENDROIT_ID);
-
-        mEndroit = EndroitLog.get(getContext()).getEndroit(endroitID);
+        Nom = getArguments().getString(ARG_NOM);
+        Description = getArguments().getString(ARG_DESCRIPTION);
     }
 
     @NonNull
@@ -60,17 +62,21 @@ public class ModificationDialogueFragment extends DialogFragment {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialogue_ajout_layout, null);
 
         mNom = v.findViewById(R.id.nom_endroit);
+        mNom.setText(Nom);
+
         mDescription = v.findViewById(R.id.description_endroit);
+        mDescription.setText(Description);
 
         return new AlertDialog.Builder(getActivity()).setView(v)
-                .setTitle("Ajouter un nouvel endroit")
+                .setTitle("Modifier un endroit")
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        mEndroit.setmNom(mNom.getText().toString());
+                        String nom = mNom.getText().toString();
+                        String description = mDescription.getText().toString();
 
-                        mEndroit.setmDescription(mDescription.getText().toString());
+                        sendResult(Activity.RESULT_OK, nom, description);
 
                     }
                 }).setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
@@ -79,5 +85,20 @@ public class ModificationDialogueFragment extends DialogFragment {
                         dismiss();
                     }
                 }).create();
+    }
+
+    private void sendResult(int resultCode, String nom, String description)
+    {
+        if (getTargetFragment() == null){
+            return;
+        }
+
+        Intent intent = new Intent();
+        Bundle extras = new Bundle();
+        extras.putString(AjoutDialogueFragment.EXTRA_NOM, nom);
+        extras.putString(AjoutDialogueFragment.EXTRA_DESCRIPTION, description);
+        intent.putExtras(extras);
+
+        getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);
     }
 }
